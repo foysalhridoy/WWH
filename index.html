@@ -65,12 +65,12 @@ body.light{
   --l:rgba(0,0,0,.08);--l2:rgba(0,0,0,.13);--l3:rgba(0,0,0,.2);
   --nav-glass:rgba(245,242,237,.95);
   --mob-glass:rgba(237,234,227,.98);
-  --hero-o1:rgba(245,242,237,.97);
-  --hero-o2:rgba(245,242,237,.74);
-  --hero-o3:rgba(245,242,237,.06);
-  --hero-ob:rgba(245,242,237,1);
-  --hero-oc:rgba(245,242,237,.58);
-  --hero-od:rgba(245,242,237,.48);
+  --hero-o1:rgba(245,242,237,.82);
+  --hero-o2:rgba(245,242,237,.45);
+  --hero-o3:rgba(245,242,237,.02);
+  --hero-ob:rgba(245,242,237,.75);
+  --hero-oc:rgba(245,242,237,.32);
+  --hero-od:rgba(245,242,237,.25);
   --surf-tint:rgba(0,0,0,.055);
   --surf-tint2:rgba(0,0,0,.035);
   --modal-grad-mid:rgba(0,0,0,.45);
@@ -311,7 +311,38 @@ body.light #nav{background:linear-gradient(to bottom,rgba(244,241,236,.6) 0%,tra
   font-size:clamp(1.9rem,8vw,5.2rem);
   line-height:.95;letter-spacing:1.5px;text-transform:uppercase;
   margin-bottom:14px;
-  text-shadow:0 2px 40px rgba(0,0,0,.7);
+  text-shadow:0 2px 20px rgba(0,0,0,.5),0 4px 40px rgba(0,0,0,.35);
+}
+body.light .hero-title{
+  text-shadow:0 1px 12px rgba(0,0,0,.6),0 2px 32px rgba(0,0,0,.5),0 4px 60px rgba(0,0,0,.4);
+  color:#fff;
+}
+body.light .hero-gtag{
+  background:rgba(244,196,48,.95);
+  color:#0d0c0a;
+  text-shadow:none;
+}
+body.light .score-imdb,body.light .score-rt{text-shadow:none}
+body.light .score-pill{
+  background:rgba(0,0,0,.35);
+  border-color:rgba(255,255,255,.25);
+  color:#fff;
+  backdrop-filter:blur(4px);
+}
+body.light .hero-scores .score-rt{
+  background:rgba(0,0,0,.3);
+  border-color:rgba(255,255,255,.2);
+  color:#ff6060;
+}
+body.light .btn-info{
+  background:rgba(0,0,0,.35);
+  border-color:rgba(255,255,255,.3);
+  color:#fff;
+  backdrop-filter:blur(6px);
+}
+body.light .btn-heart{
+  background:rgba(0,0,0,.3);
+  border-color:rgba(255,255,255,.25);
 }
 
 .hero-overview{
@@ -320,6 +351,7 @@ body.light #nav{background:linear-gradient(to bottom,rgba(244,241,236,.6) 0%,tra
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
   max-width:100%;
 }
+body.light .hero-overview{color:rgba(255,255,255,.9);text-shadow:0 1px 8px rgba(0,0,0,.4)}
 @media(min-width:600px){
   .hero-overview{-webkit-line-clamp:3;font-size:.94rem;max-width:560px}
 }
@@ -736,28 +768,27 @@ body.light #nav{background:linear-gradient(to bottom,rgba(244,241,236,.6) 0%,tra
 .mov{font-size:.9rem;line-height:1.8;color:var(--g2);margin-bottom:22px}
 
 /* Trailer — full width, always centered */
+/* ── TRAILER WRAPPER — padding-bottom trick, works everywhere ── */
 .twrap{
-  width:100%;border-radius:12px;overflow:hidden;
+  width:100%;
   position:relative;
-  aspect-ratio:16/9;
-  height:auto;
+  padding-bottom:56.25%; /* 16:9 */
+  height:0;
+  overflow:hidden;
+  border-radius:12px;
   margin-bottom:22px;
   background:#000;
   box-shadow:0 8px 36px rgba(0,0,0,.65);
 }
 .twrap iframe{
-  position:absolute;top:0;left:0;
+  position:absolute;
+  top:0;left:0;
   width:100%;height:100%;
-  border:none;display:block;
+  border:none;
+  display:block;
 }
-/* Mobile: cap trailer height so it doesn't fill the whole screen */
 @media(max-width:600px){
-  .twrap{
-    border-radius:8px;
-    margin-bottom:16px;
-    max-height:56vw; /* 16:9 on phone width */
-    aspect-ratio:16/9;
-  }
+  .twrap{border-radius:8px;margin-bottom:16px}
 }
 
 /* Section heading */
@@ -1057,10 +1088,8 @@ body.light #nav{background:linear-gradient(to bottom,rgba(244,241,236,.6) 0%,tra
   .cchar{font-size:.6rem}
   .vgrid-rich{grid-template-columns:1fr 1fr;gap:8px}
   .vcard-featured{grid-row:span 1}
-  .vcard-featured .vthumb-rich{padding-bottom:0;height:auto;aspect-ratio:16/9}
-  .vcard-rich:not(.vcard-featured) .vthumb-rich{padding-bottom:0;height:auto;aspect-ratio:16/9}
   .vgrid-rich .vcard-rich:first-child{grid-column:1/-1}
-  .vname-rich{font-size:.75rem;-webkit-line-clamp:1;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
+  .vname-rich{font-size:.75rem}
   .msh-row{flex-wrap:wrap;gap:8px}
   .vid-type-pills{flex-wrap:wrap;gap:5px}
   .vid-pill{font-size:.68rem;padding:3px 9px}
@@ -1197,17 +1226,29 @@ body.light #nav{background:linear-gradient(to bottom,rgba(244,241,236,.6) 0%,tra
 }
 .vcard-rich:hover{transform:translateY(-3px);border-color:rgba(244,196,48,.3);box-shadow:var(--sh)}
 
-.vthumb-rich{position:relative;overflow:hidden}
-.vcard-featured .vthumb-rich{aspect-ratio:9/14} /* portrait on desktop only */
-.vcard-rich:not(.vcard-featured) .vthumb-rich{aspect-ratio:16/9}
-.vthumb-rich img{width:100%;height:100%;object-fit:cover;display:block;transition:scale .4s var(--ease);position:absolute;top:0;left:0}
-.vcard-featured .vthumb-rich,.vcard-rich:not(.vcard-featured) .vthumb-rich{position:relative}
-/* Fix for absolute img inside aspect-ratio container */
-.vthumb-rich::after{content:'';display:block}
-.vcard-featured .vthumb-rich{padding-bottom:155%}
-.vcard-rich:not(.vcard-featured) .vthumb-rich{padding-bottom:56.25%}
-.vthumb-rich{height:0}
-.vthumb-rich img{position:absolute;top:0;left:0;width:100%;height:100%}
+/* ── VIDEO THUMBNAILS — padding-bottom trick, consistent ── */
+.vthumb-rich{
+  position:relative;
+  width:100%;
+  height:0;
+  overflow:hidden;
+}
+/* Desktop: featured card is portrait (tall left column) */
+@media(min-width:601px){
+  .vcard-featured .vthumb-rich{padding-bottom:150%}
+  .vcard-rich:not(.vcard-featured) .vthumb-rich{padding-bottom:56.25%}
+}
+/* Mobile: all cards 16:9 */
+@media(max-width:600px){
+  .vcard-featured .vthumb-rich,
+  .vcard-rich:not(.vcard-featured) .vthumb-rich{padding-bottom:56.25%}
+}
+.vthumb-rich img{
+  position:absolute;top:0;left:0;
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+  transition:scale .4s var(--ease);
+}
 .vcard-rich:hover .vthumb-rich img{scale:1.04}
 
 .vplay-rich{
